@@ -1,5 +1,6 @@
 package daabzor.goldenfive;
 import java.util.Scanner;
+import java.util.Arrays;
 public class GoldenFive2 {
 	
 	public static void main(String[] args) {

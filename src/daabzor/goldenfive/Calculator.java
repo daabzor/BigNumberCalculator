@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Calculator {
 	
-	private static String arrayToString (int[] array) {
+	private static String arrayToString(int[] array) {
 		String result = Arrays.toString(array).replace("[", "").replace("]", "").replace(", ", "").replaceFirst("^0+(?!$)", "");
 		return result;
 	}
 	
-	public static String add (int[] firstNumber, int[] secondNumber) {
+	public static String add(int[] firstNumber, int[] secondNumber) {
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -26,7 +26,7 @@ public class Calculator {
 	}
 	
 	
-	public static String sub (int[] firstNumber, int[] secondNumber) {
+	public static String sub(int[] firstNumber, int[] secondNumber) {
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -43,7 +43,7 @@ public class Calculator {
 	}
 	
 	
-	public static String mul (int[] firstNumber, int[] secondNumber, int strLength, int strLength2) {
+	public static String mul(int[] firstNumber, int[] secondNumber, int strLength, int strLength2) {
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -62,7 +62,7 @@ public class Calculator {
 	}
 	
 	
-	public static String div (int[] firstNumber, int[] secondNumber, int strLength, int strLength2){
+	public static String div(int[] firstNumber, int[] secondNumber, int strLength, int strLength2){
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -89,13 +89,13 @@ public class Calculator {
 				for (int j = arrayLength - 1; j >= arrayLength - secondNumberLength; j--) {
 					checkArray[j] = secondNumber[j] * i;
 				}
-				for (int t = checkArray.length - 1 ; t >= checkArray.length - secondNumberLength ; t--) {
+				for (int t = arrayLength - 1 ; t >= arrayLength - secondNumberLength ; t--) {
 					if (checkArray[t] > 9) {
 						checkArray[t - 1] = checkArray[t - 1] + (checkArray[t] / 10);				
 						checkArray[t] = checkArray[t] % 10;	
 					}	
 			}
-	
+		
 				count = 0;
 				check = 0;
 				do {						
@@ -129,63 +129,61 @@ public class Calculator {
 		return arrayToString(results);
 	}
 	
-	public static String pow (int[] intArray, int[] intArray2, int strLength) {
+	public static String pow(int[] intArray, int[] intArray2, int strLength) {
 			int[] intArray3 = new int[100];
 			int[] intResults = new int[100];
 			int[] intCompare = new int[100];
-			int arrayLength = 100;
-			
-			intCompare[arrayLength - 1] = 1;
+			intCompare[intCompare.length - 1] = 1;
 			int len;
 			int com;
 			
-			for (int c = 0; c < arrayLength; c++) {
+			for (int c = 0; c < intArray.length; c++) {
 				intArray3[c] = intArray[c];
 			}
 			do {
 				com = 0;
 				len = 0;
-				for(int c = 0; c < arrayLength; c++) {
+				for(int c = 0 ; c < intArray.length ; c++) {
 					if (intArray3[c] == 0){
 						len++;
 					} else {
 					 break;
 					}  
 				}
-				
-				int dif = arrayLength - len;
-				for (int c = 0; c < arrayLength; c++) {
+				int dif = intArray.length - len;
+				for (int c = 0; c < intArray.length; c++) {
 					intResults[c] = 0;
 				}
-				for (int i = arrayLength - 1; i >= arrayLength - dif; i--) {
-					for (int j = arrayLength - 1; j >= arrayLength - strLength; j--) {
-						intResults[(i+j) - arrayLength + 1] += intArray3[i] * intArray[j];
+				for (int i = intArray3.length - 1; i >= intArray3.length - dif; i--) {
+					for (int j = intArray.length - 1; j >= intArray.length - strLength; j--) {
+						intResults[(i+j) - intArray.length + 1] += intArray3[i] * intArray[j];
 					}	
 				}
-				for (int t = arrayLength - 1; t > 0; t--) {
+				for (int t = intResults.length - 1 ; t > 0 ; t--) {
 					if (intResults[t] > 9) {
 						intResults[t - 1] = intResults[t - 1] + (intResults[t] / 10);				
 						intResults[t] = intResults[t] % 10;	
 					}
 				}
-				for (int c = 0; c < arrayLength; c++) {
+				for (int c = 0 ; c < intArray.length ; c++) {
 					intArray3[c] = intResults[c];
 				}
 				
-				intCompare[arrayLength - 1] = intCompare[arrayLength - 1] + 1;
-				for (int i = arrayLength -1; i > 0; i--) {
+				intCompare[intCompare.length - 1] = intCompare[intCompare.length - 1] + 1;
+				for (int i = intCompare.length -1 ; i > 0 ; i--) {
 					if (intCompare[i] > 9) {
 						intCompare[i - 1] = intCompare[i - 1] + (intCompare[i] / 10);				
 						intCompare[i] = intCompare[i] % 10;	
 					}
 				}
 				
-				for (int j = arrayLength - 1; j >= 0; j--) {
+				for (int j = intArray2.length - 1; j >= 0; j--) {
 					if (intArray2[j] == intCompare[j]) {
 					com++;	
 					}
 				}
-			} while (com != 100);	
+			} while(com != 100);	
+		
 			return arrayToString(intResults);
 		}
 	}
