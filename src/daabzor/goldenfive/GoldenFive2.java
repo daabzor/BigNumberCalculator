@@ -17,7 +17,6 @@ public class GoldenFive2 {
 			  firstNumber[i + firstNumber.length - stringLength] = Integer.parseInt(String.valueOf(firstString.charAt(i)));
 		  } 
 
-		  	
 		  System.out.println("Enter second number:");
 		  String secondString = input.nextLine();
 		  int string2Length = secondString.length();  
@@ -51,11 +50,11 @@ public class GoldenFive2 {
 				break;
 				
 				case "^":
-					if(string2Length == 1 && secondNumber[secondNumber.length - 1] == 1){
-						for(int i = 0 ; i < secondNumber.length ; i++){
+					if (string2Length == 1 && secondNumber[secondNumber.length - 1] == 1) {
+						for (int i = 0 ; i < secondNumber.length ; i++) {
 							System.out.print(firstNumber[i]);
 						}
-					}else{
+					} else {
 					System.out.println(Calculator.pow(firstNumber, secondNumber, stringLength));
 					}
 				break; 
@@ -63,6 +62,6 @@ public class GoldenFive2 {
 				default:
 					System.out.println("Wrong operation");
 			}
-		}			    
+	}			    
 }
 	
