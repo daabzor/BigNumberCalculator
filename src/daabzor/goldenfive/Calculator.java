@@ -9,7 +9,18 @@ public class Calculator {
 		return result;
 	}
 	
-	public static String add(int[] firstNumber, int[] secondNumber) {
+	private static int[] changeToArray(String numberString) {
+		int[] number = new int[100];
+		int stringLength = numberString.length();	  
+		  for (int i = stringLength - 1 ; i >= 0 ; i--) {
+			  number[i + number.length - stringLength] = Integer.parseInt(String.valueOf(numberString.charAt(i)));
+		  } 
+		  return number;
+	}
+	
+	public static String add(String firstNumberString, String secondNumberString) {
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -26,7 +37,9 @@ public class Calculator {
 	}
 	
 	
-	public static String sub(int[] firstNumber, int[] secondNumber) {
+	public static String sub(String firstNumberString, String secondNumberString) {
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -43,7 +56,11 @@ public class Calculator {
 	}
 	
 	
-	public static String mul(int[] firstNumber, int[] secondNumber, int strLength, int strLength2) {
+	public static String mul(String firstNumberString, String secondNumberString) {
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
+		int strLength = firstNumberString.length();
+		int strLength2 = secondNumberString.length();
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -62,7 +79,12 @@ public class Calculator {
 	}
 	
 	
-	public static String div(int[] firstNumber, int[] secondNumber, int strLength, int strLength2){
+	public static String div(String firstNumberString, String secondNumberString){
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
+		int strLength = firstNumberString.length();
+		int strLength2 = secondNumberString.length();
+		
 		int[] results =  new int[100];
 		int arrayLength = 100;
 		
@@ -75,10 +97,15 @@ public class Calculator {
 		return arrayToString(results);
 	}
 	
-	public static String longDivision (int[] firstNumber, int[] secondNumber, int firstNumberLength, int secondNumberLength) {
+	public static String longDivision(String firstNumberString, String secondNumberString) {
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
+		int strLength = firstNumberString.length();
+		int strLength2 = secondNumberString.length();
+		
 		int[] checkArray =  new int[100];
 		int[] results = new int[100];
-		int n = firstNumberLength - secondNumberLength;
+		int n = strLength - strLength2;
 		int arrayLength = 100;
 		int check;
 		int count;
@@ -86,10 +113,10 @@ public class Calculator {
 		for (int ii = 0; ii <= n; ii++) {
 			
 			for (int i = 9; i >= 0; i--) {
-				for (int j = arrayLength - 1; j >= arrayLength - secondNumberLength; j--) {
+				for (int j = arrayLength - 1; j >= arrayLength - strLength2; j--) {
 					checkArray[j] = secondNumber[j] * i;
 				}
-				for (int t = arrayLength - 1 ; t >= arrayLength - secondNumberLength ; t--) {
+				for (int t = arrayLength - 1 ; t >= arrayLength - strLength2 ; t--) {
 					if (checkArray[t] > 9) {
 						checkArray[t - 1] = checkArray[t - 1] + (checkArray[t] / 10);				
 						checkArray[t] = checkArray[t] % 10;	
@@ -99,21 +126,21 @@ public class Calculator {
 				count = 0;
 				check = 0;
 				do {						
-					if (checkArray[arrayLength - secondNumberLength + count - 1] < firstNumber[arrayLength - firstNumberLength + count + ii - 1]) {
+					if (checkArray[arrayLength - strLength2 + count - 1] < firstNumber[arrayLength - strLength + count + ii - 1]) {
 						check = 1;
-					} else if (checkArray[arrayLength - secondNumberLength + count - 1] > firstNumber[arrayLength - firstNumberLength + count + ii - 1]) {
+					} else if (checkArray[arrayLength - strLength2 + count - 1] > firstNumber[arrayLength - strLength + count + ii - 1]) {
 						check = -1;
-					} else if (checkArray[arrayLength - secondNumberLength + count - 1] == firstNumber[arrayLength - firstNumberLength + count + ii - 1]) {
+					} else if (checkArray[arrayLength - strLength2 + count - 1] == firstNumber[arrayLength - strLength + count + ii - 1]) {
 					check = 2;
 					}
 					count++;
 					
-				} while (check != 1 && check != -1 && count != secondNumberLength + 1);	
+				} while (check != 1 && check != -1 && count != strLength2 + 1);	
 					if (check == 2 || check == 1) {
 						if (i != 0) {
 						results[arrayLength - n + ii - 1] = i;
 						}
-						for (int p = 0; p <= secondNumberLength; p++) {
+						for (int p = 0; p <= strLength2; p++) {
 							if (checkArray[arrayLength - p - 1] > firstNumber[arrayLength - n - p + ii - 1]) {
 								firstNumber[arrayLength - n - p + ii - 2] = firstNumber[arrayLength - n - p + ii - 2] - 1;				
 								firstNumber[arrayLength - n - p + ii - 1] = firstNumber[arrayLength - n - p + ii - 1] + 10;	
@@ -129,34 +156,38 @@ public class Calculator {
 		return arrayToString(results);
 	}
 	
-	public static String pow(int[] intArray, int[] intArray2, int strLength) {
-			int[] intArray3 = new int[100];
-			int[] intResults = new int[100];
-			int[] intCompare = new int[100];
-			intCompare[intCompare.length - 1] = 1;
-			int len;
-			int com;
+	public static String pow(String firstNumberString, String secondNumberString) {
+		int[] firstNumber = changeToArray(firstNumberString);
+		int[] secondNumber = changeToArray(secondNumberString);
+		int strLength = firstNumberString.length();
+		int strLength2 = secondNumberString.length();
+		int[] intArray3 = new int[100];
+		int[] intResults = new int[100];
+		int[] intCompare = new int[100];
+		intCompare[intCompare.length - 1] = 1;
+		int len;
+		int com;
 			
-			for (int c = 0; c < intArray.length; c++) {
-				intArray3[c] = intArray[c];
+			for (int c = 0; c < firstNumber.length; c++) {
+				intArray3[c] = firstNumber[c];
 			}
 			do {
 				com = 0;
 				len = 0;
-				for(int c = 0 ; c < intArray.length ; c++) {
+				for(int c = 0 ; c < firstNumber.length ; c++) {
 					if (intArray3[c] == 0){
 						len++;
 					} else {
 					 break;
 					}  
 				}
-				int dif = intArray.length - len;
-				for (int c = 0; c < intArray.length; c++) {
+				int dif = firstNumber.length - len;
+				for (int c = 0; c < firstNumber.length; c++) {
 					intResults[c] = 0;
 				}
 				for (int i = intArray3.length - 1; i >= intArray3.length - dif; i--) {
-					for (int j = intArray.length - 1; j >= intArray.length - strLength; j--) {
-						intResults[(i+j) - intArray.length + 1] += intArray3[i] * intArray[j];
+					for (int j = firstNumber.length - 1; j >= firstNumber.length - strLength; j--) {
+						intResults[(i+j) - firstNumber.length + 1] += intArray3[i] * firstNumber[j];
 					}	
 				}
 				for (int t = intResults.length - 1 ; t > 0 ; t--) {
@@ -165,7 +196,7 @@ public class Calculator {
 						intResults[t] = intResults[t] % 10;	
 					}
 				}
-				for (int c = 0 ; c < intArray.length ; c++) {
+				for (int c = 0 ; c < firstNumber.length ; c++) {
 					intArray3[c] = intResults[c];
 				}
 				
@@ -177,8 +208,8 @@ public class Calculator {
 					}
 				}
 				
-				for (int j = intArray2.length - 1; j >= 0; j--) {
-					if (intArray2[j] == intCompare[j]) {
+				for (int j = secondNumber.length - 1; j >= 0; j--) {
+					if (secondNumber[j] == intCompare[j]) {
 					com++;	
 					}
 				}
